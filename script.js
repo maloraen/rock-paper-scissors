@@ -79,3 +79,10 @@ function playGame() {
 
 
 playGame();
+
+/* to do
+results div text = ("computer choice: " + computerChoice + "\nuserChoice: " + humanChoice +
+                    "\n\ncurrent scores:\n" + "computer: " + computerScore + "\nuser: " + humanScore)
+when someone reaches 5 points, add ("\n" + winner + "wins!")
+  create a winner variable
+*/
