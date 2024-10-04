@@ -1,3 +1,7 @@
+const rockButton = document.querySelector(".rock")
+const paperButton = document.querySelector(".paper")
+const scissorsButton = document.querySelector(".scissors")
+
 function getComputerChoice() {
     let random = Math.floor(Math.random() * 3); // 0, 1, or 2
     let choice = "";
@@ -11,25 +15,24 @@ function getComputerChoice() {
         choice = "scissors";
     }
 
+    console.log("computer choice: " + choice);
     return choice;
 }
 
-function getHumanChoice() {
-    // prompt user for input
-    let shoot = prompt("Rock, paper, scissors, shoot! ")
+// instead of prompting user for input, they are pressing a button
+// so when user presses button, log the name of that button as the input ?
+function getHumanChoice(event) {
     let choice = "";
 
-    // check if input is valid
-    if (shoot.toLowerCase() === "rock") {
+    if (event.target.classList.contains('rock')) {
         choice = "rock";
-    } else if (shoot.toLowerCase() === "paper") {
+    } else if (event.target.classList.contains('paper')) {
         choice = "paper";
-    } else if (shoot.toLowerCase() === "scissors") {
+    } else if (event.target.classList.contains('scissors')) {
         choice = "scissors";
-    } else {
-        choice = "invalid";
     }
 
+    console.log("human choice: " + choice);
     return choice;
 }
 
@@ -45,24 +48,34 @@ function playGame() {
             (computerChoice == "scissors" && humanChoice === "scissors")) {
             statement = "Tie!";
         } else if ((computerChoice === "rock" && humanChoice === "scissors") ||
-                    (computerChoice === "paper" && humanChoice === "rock") ||
-                    (computerChoice === "scissors" && humanChoice === "paper")) {
+            (computerChoice === "paper" && humanChoice === "rock") ||
+            (computerChoice === "scissors" && humanChoice === "paper")) {
             statement = "you lose. " + computerChoice + " beats " + humanChoice + ".";
             computerScore++;
         } else if ((humanChoice === "rock" && computerChoice === "scissors") ||
-                    (humanChoice === "paper" && computerChoice === "rock") ||
-                    (humanChoice === "scissors" && computerChoice === "paper")) {
+            (humanChoice === "paper" && computerChoice === "rock") ||
+            (humanChoice === "scissors" && computerChoice === "paper")) {
             statement = "you win! " + humanChoice + " beats " + computerChoice + ".";
             humanScore++;
         }
         console.log(statement);
+        console.log("scores: \ncomputer: " + computerScore + "\nuser: " + humanScore);
     }
 
-        for (i = 0; i < 5; i++) {
-            console.log("Round: " + (i + 1));
-            playRound(getComputerChoice(), getHumanChoice());
-        }
+    rockButton.addEventListener('click', function (event) {
+        playRound(getComputerChoice(), getHumanChoice(event));
+    });
+
+    paperButton.addEventListener('click', function (event) {
+        playRound(getComputerChoice(), getHumanChoice(event));
+
+    });
+
+    scissorsButton.addEventListener('click', function (event) {
+        playRound(getComputerChoice(), getHumanChoice(event));
+
+    });
 }
 
+
 playGame();
-console.log("Scores:\ncomputer: " + computerScore + "\nuser: " + humanScore);
