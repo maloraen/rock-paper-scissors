@@ -33,11 +33,12 @@ function getHumanChoice() {
     return choice;
 }
 
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    let statement = "";
 
+let humanScore = 0;
+let computerScore = 0;
+let statement = "";
+
+function playGame() {
     function playRound(computerChoice, humanChoice) {
         if ((computerChoice === "rock" && humanChoice === "rock") ||
             (computerChoice === "paper" && humanChoice === "paper") ||
@@ -54,12 +55,14 @@ function playGame() {
             statement = "you win! " + humanChoice + " beats " + computerChoice + ".";
             humanScore++;
         }
-        console.log("statement: " + statement);
+        console.log(statement);
     }
 
         for (i = 0; i < 5; i++) {
+            console.log("Round: " + (i + 1));
             playRound(getComputerChoice(), getHumanChoice());
         }
 }
 
 playGame();
+console.log("Scores:\ncomputer: " + computerScore + "\nuser: " + humanScore);
