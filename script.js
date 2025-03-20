@@ -26,6 +26,7 @@ let humanScore = 0;
 
 function playRound(humanChoice, computerChoice) {
     let statement = "";
+    humanChoice = humanChoice.toLowerCase(); // "Make your function’s humanChoice parameter case-insensitive"
     // tie conditions
     if (humanChoice === computerChoice) {
             statement = "Tie!";
@@ -38,9 +39,7 @@ function playRound(humanChoice, computerChoice) {
             humanScore++;
         } 
         // lose conditions
-        else if ((humanChoice === "rock" && computerChoice === "paper") ||
-        (humanChoice === "paper" && computerChoice === "scissors") ||
-        (humanChoice === "scissors" && computerChoice === "rock")) {
+        else {
             statement = "You lose. " + computerChoice + " beats " + humanChoice + "!";
             computerScore++;
         }
