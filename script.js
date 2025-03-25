@@ -1,5 +1,3 @@
-const resultsDiv = document.querySelector(".results");
-
 function getComputerChoice() {
     let random = Math.floor(Math.random() * 3); // 0, 1, or 2
     let choice = "";
@@ -40,33 +38,58 @@ function playGame() {
             computerScore++;
         }
 
-            
+        const resultsDiv = document.querySelector(".results");
+        const roundDivElem = document.createElement("div");
+
+        if (humanScore == 5 || computerScore == 5) {
+        // game over
+            const gameOverElem = document.createElement("h2");
+            gameOverElem.textContent = "game over!"
+            roundDivElem.appendChild(gameOverElem);
+        // result
+            if (humanScore === 5) { // human reached 5 points first
+                const gameResultElem = document.createElement("p");
+                gameResultElem.textContent = "congrats! you beat the computer to 5 points!";
+                roundDivElem.appendChild(gameResultElem);
+            }
+            else { // computer reached 5 points first
+                const gameResultElem = document.createElement("p");
+                gameResultElem.textContent = "oh no! the computer beat you to 5 points.";
+                roundDivElem.appendChild(gameResultElem);
+            }
+
+            resultsDiv.insertBefore(roundDivElem, resultsDiv.firstChild);
+        }
+          
     // display round
-        let roundElem = document.createElement("h2"); // create element
+        const roundElem = document.createElement("h2"); // create element
         roundElem.textContent = "round " + (round + 1); // add text to element
-        resultsDiv.appendChild(roundElem); // append element to results div
+        roundDivElem.appendChild(roundElem); // append element to round div
 
     // display computer choice
-        let computerChoiceElem = document.createElement("p");
+        const computerChoiceElem = document.createElement("p");
         computerChoiceElem.textContent = "computer choice: " + computerChoice;
-        resultsDiv.appendChild(computerChoiceElem);
+        roundDivElem.appendChild(computerChoiceElem);
 
     // display human choice
-        let humanChoiceElem = document.createElement("p");
-        humanChoiceElem.textContent = "human hhoice: " + humanChoice;
-        resultsDiv.appendChild(humanChoiceElem);
+        const humanChoiceElem = document.createElement("p");
+        humanChoiceElem.textContent = "human choice: " + humanChoice;
+        roundDivElem.appendChild(humanChoiceElem);
 
     // display results
-        let resultsElem = document.createElement("p");
+        const resultsElem = document.createElement("p");
         resultsElem.textContent = statement;
-        resultsDiv.appendChild(resultsElem);
+        roundDivElem.appendChild(resultsElem);
 
     // display score
-        let scoreElem = document.createElement("p");
+        const scoreElem = document.createElement("p");
         scoreElem.textContent = "Computer Score: " + computerScore + " | Human Score: " + humanScore;
-        resultsDiv.appendChild(scoreElem);
+        roundDivElem.appendChild(scoreElem);
+    
+    // add round div elem to beginning of results div
+        resultsDiv.insertBefore(roundDivElem, resultsDiv.firstChild);
 
-            round++;
+        round++;
     }
 
     const rockButton = document.querySelector(".rock-button");
