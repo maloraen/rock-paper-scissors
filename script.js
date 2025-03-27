@@ -39,55 +39,62 @@ function playGame() {
         }
 
         const resultsDiv = document.querySelector(".results");
+
+        if (document.querySelector(".game-over")) return;
+
         const roundDivElem = document.createElement("div");
 
+        // display round
+            const roundElem = document.createElement("h2"); // create element
+            roundElem.textContent = "round " + (round + 1); // add text to element
+            roundDivElem.appendChild(roundElem); // append element to round div
+
+        // display computer choice
+            const computerChoiceElem = document.createElement("p");
+            computerChoiceElem.textContent = "computer choice: " + computerChoice;
+            roundDivElem.appendChild(computerChoiceElem);
+
+        // display human choice
+            const humanChoiceElem = document.createElement("p");
+            humanChoiceElem.textContent = "human choice: " + humanChoice;
+            roundDivElem.appendChild(humanChoiceElem);
+
+        // display results
+            const resultsElem = document.createElement("p");
+            resultsElem.textContent = statement;
+            roundDivElem.appendChild(resultsElem);
+
+        // display score
+            const scoreElem = document.createElement("p");
+            scoreElem.textContent = "Computer Score: " + computerScore + " | Human Score: " + humanScore;
+            roundDivElem.appendChild(scoreElem);
+            
         if (humanScore == 5 || computerScore == 5) {
+            const gameOverDivElem = document.createElement("div");
+            gameOverDivElem.classList.add("game-over");
         // game over
             const gameOverElem = document.createElement("h2");
-            gameOverElem.textContent = "game over!"
-            roundDivElem.appendChild(gameOverElem);
-        // result
-            if (humanScore === 5) { // human reached 5 points first
+            gameOverElem.textContent = "game over!";
+            gameOverDivElem.appendChild(gameOverElem);
+
+            if (humanScore == 5) {
                 const gameResultElem = document.createElement("p");
-                gameResultElem.textContent = "congrats! you beat the computer to 5 points!";
-                roundDivElem.appendChild(gameResultElem);
+                gameResultElem.textContent = "congrats! you beat the computer to 5 points!"
+                gameOverDivElem.appendChild(gameResultElem);
             }
-            else { // computer reached 5 points first
+            if (computerScore == 5) {
                 const gameResultElem = document.createElement("p");
-                gameResultElem.textContent = "oh no! the computer beat you to 5 points.";
-                roundDivElem.appendChild(gameResultElem);
+                gameResultElem.textContent = "oh no! the computer beat you to 5 points."
+                gameOverDivElem.appendChild(gameResultElem);
             }
 
             resultsDiv.insertBefore(roundDivElem, resultsDiv.firstChild);
+            resultsDiv.insertBefore(gameOverDivElem, roundDivElem);
         }
-          
-    // display round
-        const roundElem = document.createElement("h2"); // create element
-        roundElem.textContent = "round " + (round + 1); // add text to element
-        roundDivElem.appendChild(roundElem); // append element to round div
-
-    // display computer choice
-        const computerChoiceElem = document.createElement("p");
-        computerChoiceElem.textContent = "computer choice: " + computerChoice;
-        roundDivElem.appendChild(computerChoiceElem);
-
-    // display human choice
-        const humanChoiceElem = document.createElement("p");
-        humanChoiceElem.textContent = "human choice: " + humanChoice;
-        roundDivElem.appendChild(humanChoiceElem);
-
-    // display results
-        const resultsElem = document.createElement("p");
-        resultsElem.textContent = statement;
-        roundDivElem.appendChild(resultsElem);
-
-    // display score
-        const scoreElem = document.createElement("p");
-        scoreElem.textContent = "Computer Score: " + computerScore + " | Human Score: " + humanScore;
-        roundDivElem.appendChild(scoreElem);
-    
-    // add round div elem to beginning of results div
-        resultsDiv.insertBefore(roundDivElem, resultsDiv.firstChild);
+        else {
+        // add round div elem to beginning of results div
+            resultsDiv.insertBefore(roundDivElem, resultsDiv.firstChild);
+        }
 
         round++;
     }
